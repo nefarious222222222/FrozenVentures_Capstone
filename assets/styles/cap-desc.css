@@ -1,0 +1,107 @@
+:root {
+  --color-violet: #533d70;
+  --color-stone: #becdd6;
+  --color-pale-violet: #b8abd4;
+  --color-light-gray: #e7e7e7;
+  --color-dark-gray: #474747;
+
+  --color-primary-text: #111111;
+  --color-secondary-text: #585858;
+
+  --font-primary: "Open Sans";
+  --font-secondary: "Raleway";
+}
+
+/* Description Css */
+.description-container {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  margin: 70px 0;
+
+  .container {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr, 300px;
+
+    .img-container {
+      display: flex;
+      justify-content: center;
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+
+      img {
+        width: 150px;
+      }
+    }
+
+    .td-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
+      padding-right: 100px;
+      grid-column: 2 / 4;
+      grid-row: 1 / 2;
+
+      h4 {
+        font-size: 2.5rem;
+
+        span {
+          color: var(--color-violet);
+        }
+      }
+
+      p {
+        font-weight: 500;
+        text-align: justify;
+        text-indent: 50px;
+        font-size: 1.25rem;
+      }
+    }
+
+    .card-container {
+      margin: 20px 0;
+      padding: 40px 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      grid-column: 1 / 4;
+
+      h3 {
+        font-size: 2.5rem;
+        margin: 20px 0;
+
+        span {
+          color: var(--color-violet);
+        }
+      }
+
+      .cards {
+        display: flex;
+        justify-content: space-between;
+
+        .card {
+          width: fit-content;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px 40px;
+          border-radius: 10px;
+          width: 200px;
+          box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+
+          p {
+            color: var(--color-violet);
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+          }
+        }
+      }
+    }
+  }
+}
