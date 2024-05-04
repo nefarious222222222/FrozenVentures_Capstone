@@ -37,19 +37,19 @@
 
         <div class="contact-container">
           <div class="input-container">
-            <h4>Email:</h4>
+            <h4>Username:</h4>
             <input type="text" />
           </div>
 
           <div class="input-container">
-            <h4>Conact Number:</h4>
+            <h4>Email:</h4>
             <input type="text" />
           </div>
         </div>
 
         <div class="info-container">
           <div class="input-container">
-            <h4>Address:</h4>
+            <h4>Conact Number:</h4>
             <input type="text" />
           </div>
 
@@ -64,8 +64,8 @@
         </div>
 
         <div class="input-container">
-          <h4>Username:</h4>
-          <input type="text" class="username"/>
+          <h4>Address:</h4>
+          <input type="text" class="address"/>
         </div>
 
         <div class="password-container">
