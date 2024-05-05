@@ -1,59 +1,48 @@
 <?php
-//start session
+include_once('dbConnection.php');
 session_start();
-
 $errorDiv = '';
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $users = ["Admin", "Seller", "Customer"];
-    $pass = ["Admin123", "Seller123", "Customer123"];
-    $roles = ["admin", "seller", "customer"];
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $key = array_search($username, $users);
+    $sql = "SELECT * FROM user WHERE username = ? AND password = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $username, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if ($key !== false) {
-        if ($pass[$key] === $password) {
-            $role = $roles[$key];
-            if ($role === "admin") {
-                $_SESSION["admin"] = $role;
-                header("Location: ../admin/admin.php");
-                exit();
-            } elseif ($role === "seller") {
-                $_SESSION["seller"] = $role;
+    if($row = $result->fetch_assoc()){
+            if (strcasecmp($row['role'], 'Distributor') == 0) {
                 header("Location: ../pages/seller.php");
                 exit();
-            } elseif ($role === "customer") {
-                $_SESSION["customer"] = $role;
+            } elseif (strcasecmp($row['role'], 'Retailer') == 0) {
+                $_SESSION['retailer'] = $username;
+                header("Location: ../pages/seller.php");
+                exit();
+            } elseif (strcasecmp($row['role'], 'Customer') == 0) {
+                $_SESSION['customer'] = $username;
                 header("Location: ../../index.php");
                 exit();
+            } else {
+                $errorDiv .= "
+                <div class='failed-message'>
+                    <h2>Failed to Sign In</h2>
+                    <p>Sorry, the login credentials you entered are incorrect.</p>
+                    <button onclick='closeFail()'>Okay</button>
+                </div>
+                ";
             }
-        } else {
-
-            $errorDiv .= "
-            <div class='failed-message'>
-                <h2>Failed to Sign In</h2>
-                <p>
-                Sorry, the login credentials you entered are incorrect.
-                </p>
-                <button onclick = 'closeFail()'>Okay</button>
-            </div>
-            ";
-        }
     } else {
-
         $errorDiv .= "
         <div class='failed-message'>
             <h2>Failed to Sign In</h2>
-            <p>
-            Sorry, the login credentials you entered are incorrect.
-            </p>
-            <button onclick = 'closeFail()'>Okay</button>
+            <p>Sorry, the login credentials you entered are incorrect.</p>
+            <button onclick='closeFail()'>Okay</button>
         </div>
         ";
     }
-
+    $conn->close();
 }
 ?>
